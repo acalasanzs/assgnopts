@@ -20,7 +20,7 @@ dict = Ar2Dict(IterAr(2,"Object"),"units")
     1: ("Object 2","units")
 }
 ```
-    or
+or
 ```Python
 dict = Ar2Dict(["Apples","Oranges"],"units")
 {
