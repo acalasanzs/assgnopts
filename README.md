@@ -5,8 +5,37 @@ The Assgnopts is a module to create inputs via dicts and arrays with several inp
 
 
 ## Usage
-
-
+First create an dictionary
+```Python
+dic = {
+    0: ("Apples","kilos"),
+    1: ("Oranges","units")
+}
+```
+or use my built-in functions
+```Python
+dict = Ar2Dict(IterAr(2,"Object"),"units")
+{
+    0: ("Object 1","units"),
+    1: ("Object 2","units")
+}
+```
+    or
+```Python
+dict = Ar2Dict(["Apples","Oranges"],"units")
+{
+    0: ("Apples","units"),
+    1: ("Oranges","units")
+}
+```
+Then put it with all type of cutomizations and parameters:
+```Python
+MyObject = Assgn(Ar2Dict(IterAr(1,"Object"),"units"),conj="as",vals=range(1,10))
+```
+you can als print the object's values/inputs from the user:
+```Python
+MyObject.dispValues()
+```
 
 ###  Getting it
 
@@ -51,4 +80,4 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 
-Hire us: [Software Entwickler in Zürich](https://polygon-software.ch)!
+Follow me: [Github](https://github.com/acalasanzs)!
