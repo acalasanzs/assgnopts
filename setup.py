@@ -1,3 +1,13 @@
+from setuptools import setup
+setup(name='assgnopts',
+      version='1.0',
+      description='A plugin to ask the user',
+      url='https://github.com/acalasanzs/assgnopts',
+      author='Albert Calasanz',
+      author_email='acsestudios02@gmail.com',
+      license='MIT',
+      packages=['assgn',"opts"],
+      zip_safe=False)
 from distutils.core import setup
 setup(
   name = 'assgnopts',         # How you named your package folder (MyLib)
