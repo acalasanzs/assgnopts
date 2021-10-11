@@ -30,7 +30,7 @@ dict = Ar2Dict(["Apples","Oranges"],"units")
 ```
 Then put it with all type of cutomizations and parameters:
 ```Python
-MyObject = Assgn(Ar2Dict(IterAr(1,"Object"),"units"),conj="as",vals=range(1,10))
+MyObject = Assgn(dict,conj="as",vals=range(1,10))
 ```
 you can als print the object's values/inputs from the user:
 ```Python
