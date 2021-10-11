@@ -2,13 +2,13 @@ from distutils.core import setup
 setup(
   name = 'assgnopts',         # How you named your package folder (MyLib)
   packages = ['assgnopts'],   # Chose the same as "name"
-  version = '1.1.0',      # Start with a small number and increase it with every change you make
+  version = '1.2.0',      # Start with a small number and increase it with every change you make
   license='MIT',        # Chose a license from here: https://help.github.com/articles/licensing-a-repository
   description = "It's a console input improvement, and and options in class digger",   # Give a short description about your library
   author = 'Albert Calasanz',                   # Type in your name
   author_email = 'acsestudios02@gmail.com',      # Type in your E-Mail
   url = 'https://github.com/acsstudios/assgnopts',   # Provide either the link to your github or to your website
-  download_url = 'https://github.com/acalasanzs/assgnopts/blob/main/dist/assgnopts-1.1.0.tar.gz',    # I explain this later on
+  download_url = 'https://github.com/acalasanzs/assgnopts/blob/main/dist/assgnopts-1.2.0.tar.gz',    # I explain this later on
   keywords = ['assgn', 'opt'],   # Keywords that define your package best
   install_requires=[],
   classifiers=[
@@ -23,5 +23,6 @@ setup(
     'Programming Language :: Python :: 3.7',
     'Programming Language :: Python :: 3.8',
     'Programming Language :: Python :: 3.9',
+    'Programming Language :: Python :: 3.10',
   ],
 )

@@ -36,6 +36,18 @@ you can als print the object's values/inputs from the user:
 ```Python
 MyObject.dispValues()
 ```
+or get values via 
+```Python 
+MyObject.getValues()
+```
+
+Here's an example of collectin apples, oranges and weirdos:
+```Python
+def main():
+    MyObject = Assgn(Ar2Dict(["Apples","Oranges","Weirdos"],"kilos")) #Creating the object __init__
+    MyObject.input() #Collecting inputs from user/terminal
+    MyObject.dispValues()
+```
 
 ###  Getting it
 

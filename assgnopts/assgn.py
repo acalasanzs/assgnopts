@@ -1,5 +1,5 @@
 """
-Assgnopts Assgn 1.0.3 Bug fixes
+Assgnopts Assgn 1.2.0 Class improvements
 
 Made with love by Albert Calasanz Sallen
 """
@@ -173,12 +173,16 @@ class Assgn():
                 self.rang = rang
             if self.ln:
                 self.array = ["" for x in self.rang] if self.AllowStr else [0 for x in self.rang]
-        elif rang is None and (len(load)>0):
+        elif rang is None:
+            try:
+                assert len(load)>0
+            except:
+                mess.Valerr()
             self.rang = range(len(load))
             self.array = [0 for x in self.rang]
         else:
             mess.Valerr()
-        self.input()
+        # self.input()
     def input(self):
         # HEADER
         if self.title:
@@ -223,7 +227,7 @@ class Assgn():
                                     print(mess.err)
                                 else:
                                     self.array[i] = ans
-                                    print(self.array)
+                                    # print(self.array)
                                     if not(len(self.array) > 50):
                                         result = self.array
                                         if not(self.ln):
@@ -305,6 +309,19 @@ class Assgn():
                 print(a+":",j,b)
             else:
                 print("Value",i,"=",j,";","Type: {}".format(type(j).__name__))
+    def getValues(self):
+        values = {}
+        for i,j in enumerate(self.array):
+            if not(self.ln):
+                self.value = [x[1] for x in Dic2List(self.load)]
+                b = self.value[i][1]
+                a = self.value[i][0]
+                values[a] = (j,b)
+            else:
+                values[i] = j
+        return values
+    def clear(self):
+        self.array = [0 for x in self.rang]
     def __str__(self):
         conj = self.conj
         if conj == "": conj = "<None>"
@@ -324,5 +341,8 @@ if __name__ == "__main__":
     MyObject.dispValues()
     print("____________________")
     MySecondObject.dispValues() """
-    MyThirdObject =  Assgn(Ar2Dict(IterAr(int(input("How many? ")),"thing"), "units"),conj="as")
+    MySecondObject = Assgn(dic)
+    MyThirdObject =  Assgn(Ar2Dict(IterAr(3,"apples"), "units"),conj="as")
+    MyThirdObject.input()
+    print(MyThirdObject.getValues())
     MyThirdObject.dispValues()
