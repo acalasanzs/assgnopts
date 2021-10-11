@@ -221,18 +221,18 @@ class Assgn():
                             except:
                                 if (ans < 0 and not(self.AllowNegative)) or (ans == 0 and not(self.Allow0)):
                                     print(mess.err)
-                            else:
-                                self.array[i] = ans
-                                print(self.array)
-                                if not(len(self.array) > 50):
-                                    result = self.array
-                                    if not(self.ln):
-                                        result = List(self.array,self.load)
-                                    else:
-                                        result = color.b.red+List2list(result,", ")+" "+color.end
                                 else:
-                                    result = color.b.red+"Too many questions"+color.end
-                                print(result)
+                                    self.array[i] = ans
+                                    print(self.array)
+                                    if not(len(self.array) > 50):
+                                        result = self.array
+                                        if not(self.ln):
+                                            result = List(self.array,self.load)
+                                        else:
+                                            result = color.b.red+List2list(result,", ")+" "+color.end
+                                    else:
+                                        result = color.b.red+"Too many questions"+color.end
+                                    print(result)
                     except ValueError:
                         print(mess.err)
                         continue
