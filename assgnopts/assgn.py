@@ -1,9 +1,14 @@
 """
-Assgnopts Assgn 1.2.0 Class improvements
+Assgnopts Assgn 2.0.0 CSV
 
 Made with love by Albert Calasanz Sallen
+TODO:
+Load CSV
 """
 import os
+import csv
+import string
+import random
 os.system("")
 def List(list,load):                                     #Converteix un array en un string
     "Converts array to string"
@@ -60,6 +65,14 @@ def IterAr(iter,word):
     for x in range(iter):
         list.append(word+" "+str(x+1))
     return list
+def Ar4Ar2Dic(ar1:list,ar2:list):
+    "Converts 2 arrays to dict with *key:*value"
+    t = []
+    for idx,i in enumerate(ar1):
+        t.append((i,ar2[idx]))
+    return dict((key[0],key[1]) for key in t)
+def id_generator(size=12, chars=string.ascii_uppercase + string.digits):
+    return ''.join(random.choice(chars) for _ in range(size))
 class color:
     class t:
         HEADER = '\033[95m'
@@ -322,6 +335,34 @@ class Assgn():
         return values
     def clear(self):
         self.array = [0 for x in self.rang]
+    def save(self,rndm=False):
+        self.value = [x[1] for x in Dic2List(self.load)]
+        if rndm:
+            filename = id_generator() + "-" + [objname for objname, oid in globals().items()
+            if id(oid)==id(self)][0] +".assgnopts"+ ".csv"
+        else:
+            filename = [objname for objname, oid in globals().items()
+            if id(oid)==id(self)][0] +".assgnopts"+ ".csv"
+        with open(filename, mode='w') as csv_file:
+            fieldnames = [i[0] for i in self.value]
+            fieldnames.insert(0,"UNIT")
+            writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
+            writer.writeheader()
+            a = [i[0] for i in self.value]
+            b = [x[0] for x in Dic2List(self.load)]
+            dic = Ar4Ar2Dic(fieldnames,[self.value[0][1]]+b)
+            writer.writerow(dic)
+    def loadcsv(self,file:str):
+        self.value = [x[1] for x in Dic2List(self.load)]
+        with open(file, mode='r') as csv_file:
+            csv_reader = csv.DictReader(csv_file)
+            line_count = 0
+            for row in csv_reader:
+                if line_count == 0:
+                    row.pop("UNIT",None)
+                    self.array = [row[key] for key in row]
+                    line_count += 1
+                line_count += 1
     def __str__(self):
         conj = self.conj
         if conj == "": conj = "<None>"
@@ -341,8 +382,10 @@ if __name__ == "__main__":
     MyObject.dispValues()
     print("____________________")
     MySecondObject.dispValues() """
-    MySecondObject = Assgn(dic)
+    """ MySecondObject = Assgn(dic)
     MyThirdObject =  Assgn(Ar2Dict(IterAr(3,"apples"), "units"),conj="as")
     MyThirdObject.input()
     print(MyThirdObject.getValues())
-    MyThirdObject.dispValues()
+    MyThirdObject.dispValues() """
+    data = Assgn(Ar2Dict(IterAr(5,"label"),"ACU(s)"))
+    data.loadcsv("data.assgnopts.csv")
