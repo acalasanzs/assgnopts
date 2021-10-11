@@ -58,10 +58,10 @@ $ pip install assgnopts
 
 ### Using it
 
-Assgnopts was programmed with ease-of-use in mind. First, import Assgn, optionsinclass and optionsAll from Assgnopts
+Assgnopts was programmed with ease-of-use in mind. First, import *
 
 ```Python
-from assgnopts import Assgn, optionsinclass, optionsAll
+from assgnopts import *
 ```
 
 And you're ready to go!
