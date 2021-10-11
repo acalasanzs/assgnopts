@@ -1,5 +1,5 @@
 """
-Assgnopts Assgn 1.0
+Assgnopts Assgn 1.0.3 Bug fixes
 
 Made with love by Albert Calasanz Sallen
 """
@@ -108,7 +108,7 @@ class Assgn():
         
         Object:
         self.array returns inputs
-
+        64 Bits: 9223372036854775807 max, 32 Bits: 2147483647 max
         """
     def __init__(self,load=None,rang=None,rules=None,conj="",vals=None,ui= True,no=True):
         self.AllowNegative = False
@@ -223,11 +223,15 @@ class Assgn():
                                     print(mess.err)
                             else:
                                 self.array[i] = ans
-                                result = self.array
-                                if not(self.ln):
-                                    result = List(self.array,self.load)
+                                print(self.array)
+                                if not(len(self.array) > 50):
+                                    result = self.array
+                                    if not(self.ln):
+                                        result = List(self.array,self.load)
+                                    else:
+                                        result = color.b.red+List2list(result,", ")+" "+color.end
                                 else:
-                                    result = color.b.red,List2list(result,", "),color.end
+                                    result = color.b.red+"Too many questions"+color.end
                                 print(result)
                     except ValueError:
                         print(mess.err)
@@ -300,7 +304,7 @@ class Assgn():
                 a = self.value[i][0]
                 print(a+":",j,b)
             else:
-                print("Valor",i,"=",j,";","Type: {}".format(type(j).__name__))
+                print("Value",i,"=",j,";","Type: {}".format(type(j).__name__))
     def __str__(self):
         conj = self.conj
         if conj == "": conj = "<None>"
@@ -314,9 +318,11 @@ if __name__ == "__main__":
     }
     #ElMeuObjecte = Assgn(dic)
     #print(ElMeuObjecte)
-    MyObject = Assgn(Ar2Dict(IterAr(1,"Object"),"units"),conj="as",vals=range(1,10))
+    """ MyObject = Assgn(Ar2Dict(IterAr(1,"Object"),"units"),conj="as",vals=range(1,10))
     MySecondObject = Assgn(dic)
     print("________________________________________")
     MyObject.dispValues()
     print("____________________")
-    MySecondObject.dispValues()
+    MySecondObject.dispValues() """
+    MyThirdObject =  Assgn(Ar2Dict(IterAr(int(input("How many? ")),"thing"), "units"),conj="as")
+    MyThirdObject.dispValues()
