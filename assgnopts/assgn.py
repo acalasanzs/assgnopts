@@ -1,5 +1,5 @@
 """
-Assgnopts Assgn 2.0.0 CSV
+Assgnopts Assgn 1.3.0 CSV
 
 Made with love by Albert Calasanz Sallen
 TODO:
@@ -361,6 +361,7 @@ class Assgn():
             line_count = 0
             for row in csv_reader:
                 if line_count == 0:
+                    self.name = row['DATA']
                     row.pop("DATA",None)
                     array = [row[key] for key in row]
                     self.array = []
