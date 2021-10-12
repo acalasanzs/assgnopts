@@ -8,7 +8,7 @@ Load CSV
 import os
 import csv
 import string
-import random
+import random, pandas
 os.system("")
 def List(list,load):                                     #Converteix un array en un string
     "Converts array to string"
@@ -123,11 +123,12 @@ class Assgn():
         self.array returns inputs
         64 Bits: 9223372036854775807 max, 32 Bits: 2147483647 max
         """
-    def __init__(self,load=None,rang=None,rules=None,conj="",vals=None,ui= True,no=True):
+    def __init__(self,load=None,rang=None,rules=None,conj="",vals=None,ui= True,no=True,name=None):
         self.AllowNegative = False
         self.Allow0 = False
         self.AllowStr = False
         self.OnlyInt = False
+        self.name = name
         self.vals = False
         self.value = []
         self.title = ui
@@ -197,6 +198,7 @@ class Assgn():
             mess.Valerr()
         # self.input()
     def input(self):
+        self.name = [objname for objname, oid in globals().items() if id(oid)==id(self)][0] if self.name is None else self.name
         # HEADER
         if self.title:
             print(color.t.OKGREEN+"Set of {} questions".format(len(self.array))+color.end)
@@ -335,23 +337,23 @@ class Assgn():
         return values
     def clear(self):
         self.array = [0 for x in self.rang]
-    def save(self,rndm=False):
+    def save(self,filename=None,rndm=False):
         self.value = [x[1] for x in Dic2List(self.load)]
-        if rndm:
-            filename = id_generator() + "-" + [objname for objname, oid in globals().items()
-            if id(oid)==id(self)][0] +".assgnopts"+ ".csv"
-        else:
-            filename = [objname for objname, oid in globals().items()
-            if id(oid)==id(self)][0] +".assgnopts"+ ".csv"
-        with open(filename, mode='w') as csv_file:
-            fieldnames = [i[0] for i in self.value]
-            fieldnames.insert(0,"UNIT")
+        it = self.name
+        if not filename:
+            if rndm:
+                filename = id_generator() + "-" + it +".assgnopts"+ ".csv"
+            else:
+                filename = it +".assgnopts"+ ".csv"
+                #
+        with open(filename, mode='w',newline='') as csv_file:
+            fieldnames = ["DATA"]+[i[0] for i in self.value]
             writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
-            writer.writeheader()
-            a = [i[0] for i in self.value]
             b = [x[0] for x in Dic2List(self.load)]
-            dic = Ar4Ar2Dic(fieldnames,[self.value[0][1]]+b)
+            dic = Ar4Ar2Dic(fieldnames,[it]+[(b[idx],self.value[idx][1]) for idx,i in enumerate(b)])
+            writer.writeheader()
             writer.writerow(dic)
+        return filename
     def loadcsv(self,file:str):
         self.value = [x[1] for x in Dic2List(self.load)]
         with open(file, mode='r') as csv_file:
@@ -359,8 +361,18 @@ class Assgn():
             line_count = 0
             for row in csv_reader:
                 if line_count == 0:
-                    row.pop("UNIT",None)
-                    self.array = [row[key] for key in row]
+                    row.pop("DATA",None)
+                    array = [row[key] for key in row]
+                    self.array = []
+                    dic = {}
+                    for idx,x in enumerate(array):
+                        if x.replace("(","").replace(")","").split(", ")[0].isnumeric():
+                            self.array.insert(idx,eval(x.replace("(","").replace(")","").split(", ")[0]))
+                        else:
+                            self.array.insert(idx,x.replace("(","").replace(")","").split(", ")[0])
+                        x = eval(x)
+                        dic[idx] = x
+                    self.load = dic
                     line_count += 1
                 line_count += 1
     def __str__(self):
@@ -387,5 +399,7 @@ if __name__ == "__main__":
     MyThirdObject.input()
     print(MyThirdObject.getValues())
     MyThirdObject.dispValues() """
-    data = Assgn(Ar2Dict(IterAr(5,"label"),"ACU(s)"))
-    data.loadcsv("data.assgnopts.csv")
+    data = Assgn(Ar2Dict(IterAr(5,"label"),"ACU(s)"),name="data")
+    datafile = data.save()
+    print(pandas.read_csv(datafile,header=0,index_col='DATA'),end="\n\n")
+    data.loadcsv(datafile)
