@@ -1,5 +1,5 @@
 """
-Assgnopts Assgn 1.3.1 CSV BUG FIXES
+Assgnopts Assgn 1.3.2 CSV BUG FIXES
 
 Made with love by Albert Calasanz Sallen
 TODO:
@@ -128,7 +128,7 @@ class Assgn():
         self.Allow0 = False
         self.AllowStr = False
         self.OnlyInt = False
-        self.name = name if name is not None else str(id(self))
+        self.name =  name
         self.vals = False
         self.value = []
         self.title = ui
@@ -201,7 +201,7 @@ class Assgn():
                 mess.Valerr()
             # self.input()
     def input(self):
-        self.name = [objname for objname, oid in globals().items() if id(oid)==id(self)][0] if self.name is None else self.name
+        self.name = [objname for objname, oid in globals().items() if id(oid)==id(self)][0] if self.name is None else str(id(self))
         # HEADER
         if self.title:
             print(color.t.OKGREEN+"Set of {} questions".format(len(self.array))+color.end)
@@ -341,8 +341,11 @@ class Assgn():
     def clear(self):
         self.array = [0 for x in self.rang]
     def save(self,filename=None,rndm=False):
-        self.value = [x[1] for x in Dic2List(self.load)]
-        it = self.name
+        if not self.ln:
+            self.value = [x[1] for x in Dic2List(self.load)]
+        else:
+            self.value = [x[1] for x in Dic2List(List2Dict([x for x in self.load]))]
+        it = self.name if self.name is not None else str(id(self))
         if not filename:
             if rndm:
                 filename = id_generator() + "-" + it +".assgnopts"+ ".csv"
@@ -352,8 +355,12 @@ class Assgn():
         with open(filename, mode='w',newline='') as csv_file:
             fieldnames = ["DATA"]+[i[0] for i in self.value]
             writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
-            b = [x[0] for x in Dic2List(self.load)]
-            dic = Ar4Ar2Dic(fieldnames,[it]+[(b[idx],self.value[idx][1]) for idx,i in enumerate(b)])
+            if not self.ln:
+                b = [x[0] for x in Dic2List(self.load)]
+                dic = Ar4Ar2Dic(fieldnames,[it]+[(b[idx],self.value[idx][1]) for idx,i in enumerate(b)])
+            else:
+                b = [x[0] for x in Dic2List(List2Dict([x for x in self.load]))]
+                dic = Ar4Ar2Dic(fieldnames,[it]+[self.array[idx] for idx,i in enumerate(b)])
             writer.writeheader()
             writer.writerow(dic)
         return filename
@@ -410,6 +417,9 @@ if __name__ == "__main__":
     datafile = data.save()
     print(pandas.read_csv(datafile,header=0,index_col='DATA'),end="\n\n")
     data.loadcsv(datafile) """
-    data = Assgn(conj="as")
+    """ data = Assgn(conj="as")
     data.loadcsv("data.assgnopts.csv")
+    data.input() """
+    data = Assgn(range(3))
     data.input()
+    data.save()
