@@ -128,7 +128,7 @@ class Assgn():
         self.Allow0 = False
         self.AllowStr = False
         self.OnlyInt = False
-        self.name = name
+        self.name = name if name is not None else str(id(self))
         self.vals = False
         self.value = []
         self.title = ui
@@ -136,67 +136,70 @@ class Assgn():
         self.ln = None
         self.ans = None
         self.rules = rules
-        if type(vals) in (tuple,range,list):
-            self.vals = vals
-        elif vals is not None:
-            mess.InvalidInput()
-     # Comprovar les rules
-        self.conj = "" if type(conj) is not str else conj
-        if type(load) is list:
-            dic = dict.fromkeys(range(len(load)),"")
-            for x in dic:
-                dic[x] = load[x]
-            load = dic
-        elif type(load) is range:
-            self.ln = True
-        if rules is None:
-            pass
-        elif (type(rules) is list) and (len(rules) == 3):
-            if all(i in(True,False) for i in rules):
-                self.Allow0 = rules[0]
-                self.AllowNegative = rules[1]
-                self.OnlyInt = rules[2]
-            else:
-                print("Error on rules")
-                mess.Valerr()
-        if self.OnlyInt and not self.Allow0 and not self.AllowNegative:
-            self.rules = None
-        elif rules == "str":
-            self.AllowStr = True
-        else:
-            pass
-            #print(color.b.red+"Error in rules input\nAll will become false"+color.end)
+        self.conj = conj
+        self.rang = None
+        if not(load is None) and (rang is None):
+            if type(vals) in (tuple,range,list):
+                self.vals = vals
+            elif vals is not None:
+                mess.InvalidInput()
         # Comprovar les rules
-        self.ln = False if self.ln == None else True
-        if load is None: self.ln = True
-        if not(type(load) is dict) and not(self.ln):                                 #Verificar si load is dict
-            print("Line 121")
-            mess.DictErr()
-        else:
-            self.load = load
-            if type(load) is dict:
-                for j in list(self.load):
-                    if not(type(self.load[j]) in (tuple,list)):
-                        self.load[j] = (self.load[j],"")
-                #print(self.load)
-        #---------------------------------------------------------------------------------------
-        if isinstance(rang,range):
-            if not(len([x for x in rang]) > 0):
-                mess.Valerr()
+            self.conj = "" if type(conj) is not str else conj
+            if type(load) is list:
+                dic = dict.fromkeys(range(len(load)),"")
+                for x in dic:
+                    dic[x] = load[x]
+                load = dic
+            elif type(load) is range:
+                self.ln = True
+            if rules is None:
+                pass
+            elif (type(rules) is list) and (len(rules) == 3):
+                if all(i in(True,False) for i in rules):
+                    self.Allow0 = rules[0]
+                    self.AllowNegative = rules[1]
+                    self.OnlyInt = rules[2]
+                else:
+                    print("Error on rules")
+                    mess.Valerr()
+            if self.OnlyInt and not self.Allow0 and not self.AllowNegative:
+                self.rules = None
+            elif rules == "str":
+                self.AllowStr = True
             else:
-                self.rang = rang
-            if self.ln:
-                self.array = ["" for x in self.rang] if self.AllowStr else [0 for x in self.rang]
-        elif rang is None:
-            try:
-                assert len(load)>0
-            except:
+                pass
+                #print(color.b.red+"Error in rules input\nAll will become false"+color.end)
+            # Comprovar les rules
+            self.ln = False if self.ln == None else True
+            if load is None: self.ln = True
+            if not(type(load) is dict) and not(self.ln):                                 #Verificar si load is dict
+                print("Line 121")
+                mess.DictErr()
+            else:
+                self.load = load
+                if type(load) is dict:
+                    for j in list(self.load):
+                        if not(type(self.load[j]) in (tuple,list)):
+                            self.load[j] = (self.load[j],"")
+                    #print(self.load)
+            #---------------------------------------------------------------------------------------
+            if isinstance(rang,range):
+                if not(len([x for x in rang]) > 0):
+                    mess.Valerr()
+                else:
+                    self.rang = rang
+                if self.ln:
+                    self.array = ["" for x in self.rang] if self.AllowStr else [0 for x in self.rang]
+            elif rang is None:
+                try:
+                    assert len(load)>0
+                except:
+                    mess.Valerr()
+                self.rang = range(len(load))
+                self.array = [0 for x in self.rang]
+            else:
                 mess.Valerr()
-            self.rang = range(len(load))
-            self.array = [0 for x in self.rang]
-        else:
-            mess.Valerr()
-        # self.input()
+            # self.input()
     def input(self):
         self.name = [objname for objname, oid in globals().items() if id(oid)==id(self)][0] if self.name is None else self.name
         # HEADER
@@ -355,7 +358,6 @@ class Assgn():
             writer.writerow(dic)
         return filename
     def loadcsv(self,file:str):
-        self.value = [x[1] for x in Dic2List(self.load)]
         with open(file, mode='r') as csv_file:
             csv_reader = csv.DictReader(csv_file)
             line_count = 0
@@ -400,7 +402,10 @@ if __name__ == "__main__":
     MyThirdObject.input()
     print(MyThirdObject.getValues())
     MyThirdObject.dispValues() """
-    data = Assgn(Ar2Dict(IterAr(5,"label"),"ACU(s)"),name="data")
+    """ data = Assgn(Ar2Dict(IterAr(5,"label"),"ACU(s)"))
     datafile = data.save()
     print(pandas.read_csv(datafile,header=0,index_col='DATA'),end="\n\n")
-    data.loadcsv(datafile)
+    data.loadcsv(datafile) """
+    data = Assgn()
+    data.loadcsv("data.assgnopts.csv")
+    print(data)
