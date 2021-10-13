@@ -1,5 +1,5 @@
 """
-Assgnopts Assgn 1.3.0 CSV
+Assgnopts Assgn 1.3.1 CSV BUG FIXES
 
 Made with love by Albert Calasanz Sallen
 TODO:
@@ -223,7 +223,7 @@ class Assgn():
                         if not(self.ln):
                             self.value = [x[1] for x in Dic2List(self.load)]
                             b = self.value[i][1]
-                            a = self.value[i][0]
+                            a = self.value[i][0]                                 #[x[0] for x in Dic2List(self.load)][i]
                         if len(self.conj) > 0 and len(b) > 0: magn = " "+self.conj+" "+str(b)+" : "
                         if self.AllowStr:
                             ans = str(input(self.no+"Enter "+str(a)+magn))
@@ -374,8 +374,12 @@ class Assgn():
                         else:
                             self.array.insert(idx,x.replace("(","").replace(")","").split(", ")[0])
                         x = eval(x)
-                        dic[idx] = x
-                    self.load = dic
+                        dic[list(zip(row))[idx][0]] = x
+                    self.rang = range(len(dic))
+                    self.value = [x[1] for x in Dic2List(dic)]
+                    self.load = {}
+                    for idx,x in enumerate(Dic2List(dic)):
+                        self.load[idx] = (x[0],x[1][1])
                     line_count += 1
                 line_count += 1
     def __str__(self):
@@ -389,8 +393,8 @@ if __name__ == "__main__":
         0: ("Peres","kilos"),
         1: ("Pomes","unitats")
     }
-    #ElMeuObjecte = Assgn(dic)
-    #print(ElMeuObjecte)
+    """ ElMeuObjecte = Assgn(dic)
+    print(ElMeuObjecte) """
     """ MyObject = Assgn(Ar2Dict(IterAr(1,"Object"),"units"),conj="as",vals=range(1,10))
     MySecondObject = Assgn(dic)
     print("________________________________________")
@@ -406,6 +410,6 @@ if __name__ == "__main__":
     datafile = data.save()
     print(pandas.read_csv(datafile,header=0,index_col='DATA'),end="\n\n")
     data.loadcsv(datafile) """
-    data = Assgn()
+    data = Assgn(conj="as")
     data.loadcsv("data.assgnopts.csv")
-    print(data)
+    data.input()
