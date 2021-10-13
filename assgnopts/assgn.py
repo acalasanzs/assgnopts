@@ -1,5 +1,5 @@
 """
-Assgnopts Assgn 1.3.2 CSV BUG FIXES
+Assgnopts Assgn 1.3.3 CSV BUG FIXES
 
 Made with love by Albert Calasanz Sallen
 TODO:
@@ -8,7 +8,7 @@ Load CSV
 import os
 import csv
 import string
-import random, pandas
+import random
 os.system("")
 def List(list,load):                                     #Converteix un array en un string
     "Converts array to string"
