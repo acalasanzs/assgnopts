@@ -12,7 +12,7 @@ dic = {
     1: ("Oranges","units")
 }
 ```
-or use my built-in functions
+or use my built-in functions (or use a range)
 ```Python
 dict = Ar2Dict(IterAr(2,"Object"),"units")
 {
