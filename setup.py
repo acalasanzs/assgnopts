@@ -4,7 +4,7 @@ setup(
   packages = ['assgnopts'],   # Chose the same as "name"
   version = '1.3.1',      # Start with a small number and increase it with every change you make
   license='MIT',        # Chose a license from here: https://help.github.com/articles/licensing-a-repository
-  description = "It's a console input improvement with csv implementation, and and options in class digger",   # Give a short description about your library
+  description = "It's a console input improvement with csv implementation, and options in class digger",   # Give a short description about your library
   author = 'Albert Calasanz',                   # Type in your name
   author_email = 'acsestudios02@gmail.com',      # Type in your E-Mail
   url = 'https://github.com/acsstudios/assgnopts',   # Provide either the link to your github or to your website

@@ -48,7 +48,34 @@ def main():
     MyObject.input() #Collecting inputs from user/terminal
     MyObject.dispValues()
 ```
+###  CSV
+Following the object we maked above, we can export the answers into a csv file, here's how:
+```Python
+MyObject = Assgn(Ar2Dict(["Apples","Oranges","Weirdos"],"kilos")) #Creating the object __init__
+MyObject.input() #Collecting inputs from user/terminal
+MyObject.save() #It will save the csv as: MyObject.assgnopts.csv
+```
+Then we can load It
+```Python
+MyObjectLoaded = Assgn() #Creating the object __init__
+MyObjectLoaded.loadcsv("MyObject.assgnopts.csv") #It will save the csv as: MyObject.assgnopts.csv
+```
+One time we loaded It, we can re-ask the questions loaded:
+```Python
+MyObjectLoaded.input()
+```
 
+Here's an example of the entire code:
+```Python
+MyObject = Assgn(Ar2Dict(["Apples","Oranges","Weirdos"],"kilos")) #Creating the object __init__
+MyObject.input() #Collecting inputs from user/terminal
+
+#-------------------------------------------------------------
+
+MyObjectLoaded = Assgn() #Creating the object __init__ of the second object
+MyObjectLoaded.loadcsv(MyObject.save()) #The .save() method returns the filename
+MyObjectLoaded.input() #Re-ask the questions
+```
 ###  Getting it
 
 To download assgnopts, either fork this github repo or simply use Pypi via pip.
