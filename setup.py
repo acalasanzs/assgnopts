@@ -4,13 +4,13 @@ setup(
   packages = ['assgnopts'],   # Chose the same as "name"
   version = '1.3.1',      # Start with a small number and increase it with every change you make
   license='MIT',        # Chose a license from here: https://help.github.com/articles/licensing-a-repository
-  description = "It's a console input improvement, and and options in class digger",   # Give a short description about your library
+  description = "It's a console input improvement with csv implementation, and and options in class digger",   # Give a short description about your library
   author = 'Albert Calasanz',                   # Type in your name
   author_email = 'acsestudios02@gmail.com',      # Type in your E-Mail
   url = 'https://github.com/acsstudios/assgnopts',   # Provide either the link to your github or to your website
-  download_url = 'https://github.com/acalasanzs/assgnopts/blob/main/dist/assgnopts-1.3.0.tar.gz',    # I explain this later on
+  download_url = 'https://github.com/acalasanzs/assgnopts/blob/main/dist/assgnopts-1.3.1.tar.gz',    # I explain this later on
   keywords = ['assgn', 'opt'],   # Keywords that define your package best
-  install_requires=['pandas','numpy'],
+  install_requires=['numpy'],
   classifiers=[
     'Development Status :: 5 - Production/Stable',      # Chose either "3 - Alpha", "4 - Beta" or "5 - Production/Stable" as the current state of your package
     'Intended Audience :: Developers',      # Define that your audience are developers
