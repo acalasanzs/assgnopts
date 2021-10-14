@@ -201,7 +201,10 @@ class Assgn():
                 mess.Valerr()
             # self.input()
     def input(self):
-        self.name = [objname for objname, oid in globals().items() if id(oid)==id(self)][0] if self.name is None else str(id(self))
+        try:
+            self.name = [objname for objname, oid in globals().items() if id(oid)==id(self)][0] if self.name is None else str(id(self))
+        except:
+            self.name = str(id(self))
         # HEADER
         if self.title:
             print(color.t.OKGREEN+"Set of {} questions".format(len(self.array))+color.end)
@@ -420,6 +423,6 @@ if __name__ == "__main__":
     """ data = Assgn(conj="as")
     data.loadcsv("data.assgnopts.csv")
     data.input() """
-    data = Assgn(range(3))
+    data = Assgn(range(12))
     data.input()
     data.save()
