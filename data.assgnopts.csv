@@ -1,2 +1,2 @@
-DATA,0,1,2
-data,4.0,5.0,5.0
+DATA,peres 1,peres 2,peres 3,peres 4,peres 5
+data,"(0, 'kilos')","(1, 'kilos')","(2, 'kilos')","(3, 'kilos')","(4, 'kilos')"

@@ -1,5 +1,5 @@
 """
-Assgnopts Assgn 1.3.3 CSV BUG FIXES
+Assgnopts Assgn 1.3.5 CSV BUG FIXES
 
 Made with love by Albert Calasanz Sallen
 TODO:
@@ -204,7 +204,7 @@ class Assgn():
         try:
             self.name = [objname for objname, oid in globals().items() if id(oid)==id(self)][0] if self.name is None else str(id(self))
         except:
-            self.name = str(id(self))
+            self.name = str(id(self)) if type(self.name) is not str else self.name
         # HEADER
         if self.title:
             print(color.t.OKGREEN+"Set of {} questions".format(len(self.array))+color.end)
@@ -423,6 +423,6 @@ if __name__ == "__main__":
     """ data = Assgn(conj="as")
     data.loadcsv("data.assgnopts.csv")
     data.input() """
-    data = Assgn(range(12))
+    data = Assgn(Ar2Dict(IterAr(5,"peres"),"kilos"))
     data.input()
     data.save()
