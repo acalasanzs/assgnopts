@@ -21,8 +21,8 @@ MyStuff = Assgn(Ar2Dict(fruits,"kilos"),conj="as")
 MySecondStuff = Assgn(Ar2Dict(fruits,"units"),conj="as")
 
 # Set the two object's values (random answers)
-MyStuff.array = [random.choice(list(range(1,1000))) for x in range(62)]
-MySecondStuff.array = [random.choice(list(range(1,100))) for x in range(62)]
+MyStuff.array = [random.choice(list(range(1,1000))) for x in range(len(fruits))]
+MySecondStuff.array = [random.choice(list(range(1,100))) for x in range(len(fruits))]
 
 # Display values
 MyStuff.dispValues()
