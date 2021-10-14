@@ -1,3 +1,6 @@
 from assgnopts import *
 import pandas
-print(pandas.read_csv('data.assgnopts.csv'))
+
+data = Assgn(range(2),name="olakase")
+data.input()
+print(pandas.read_csv(data.save()))

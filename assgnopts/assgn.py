@@ -201,10 +201,7 @@ class Assgn():
                 mess.Valerr()
             # self.input()
     def input(self):
-        try:
-            self.name = [objname for objname, oid in globals().items() if id(oid)==id(self)][0] if self.name is None else str(id(self))
-        except:
-            self.name = str(id(self)) if type(self.name) is not str else self.name
+        self.name = id(self) if self.name is None else self.name
         # HEADER
         if self.title:
             print(color.t.OKGREEN+"Set of {} questions".format(len(self.array))+color.end)
