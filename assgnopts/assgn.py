@@ -10,6 +10,23 @@ import csv
 import string
 import random
 os.system("")
+def Ar2List(list:list,ma:str=""):                                     #Converteix un array en un string
+    "Converts array to string"
+    temp = []
+    for i,j in enumerate(list):
+        temp.append((str(j),ma))
+    return temp
+def Ar2ListColor(list:list,ma:str=""):                                     #Converteix un array en un string
+    "Converts array to string"
+    temp = color.b.blue
+    if len(ma) > 0:
+        ma = " "+ma
+    for i,j in enumerate(list):
+        y = " "+color.end
+        if i < len(list)-1:
+            y = " & "
+        temp += str(j) + ma + y
+    return temp
 def List(list,load):                                     #Converteix un array en un string
     "Converts array to string"
     value = [x[1] for x in Dic2List(load)]
@@ -52,6 +69,13 @@ def Ar2Dict(ar,ma = None):
             r.append((x,x))
         dic = dict((key,r[key]) for key in range(len(ar)))
         return dic
+def Ar2Dict2(ar):
+    "Converts array to dict with key:*value"
+    r = []
+    for x in ar:
+        r.append(x)
+    dic = dict((key,r[key]) for key in range(len(ar)))
+    return dic
 def List2Dict(ar):
     "Converts list to dict"
     r = []
@@ -73,6 +97,12 @@ def Ar4Ar2Dic(ar1:list,ar2:list):
     return dict((key[0],key[1]) for key in t)
 def id_generator(size=12, chars=string.ascii_uppercase + string.digits):
     return ''.join(random.choice(chars) for _ in range(size))
+def truncate(n, decimals=0):
+    multiplier = 10 ** decimals
+    return int(n * multiplier) / multiplier
+def dispDict(ar:list,dic:dict):
+    for x in range(len(dic.keys())):
+        print(ar[x]+": "+dic[x][0]+" "+dic[x][1])
 class color:
     class t:
         HEADER = '\033[95m'
