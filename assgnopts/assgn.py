@@ -1,5 +1,5 @@
 """
-Assgnopts Assgn 1.3.5 CSV BUG FIXES
+Assgnopts Assgn 1.3.7 CSV BUG FIXES
 
 Made with love by Albert Calasanz Sallen
 TODO:
@@ -393,6 +393,21 @@ class Assgn():
         conj = self.conj
         if conj == "": conj = "<None>"
         return color.t.OKCYAN+"Rules\nA0{},A-{},AStr{},OnlInt{}".format(self.Allow0,self.AllowNegative,self.AllowStr,self.OnlyInt)+"\n"+color.end+"\nconj: {},\nrang: {},\n\nquestions: {},\n\nInputs: {}".format(conj,self.rang,self.value,self.array)
+    def __add__(self,other):
+        load = {}
+        x = self.load
+        y = other.load
+        i = (len(self.load.keys())+len(other.load.keys()))
+        count = 0
+        while count < i:
+            for j in x.keys():
+                load[count] = x[j]
+                count += 1
+            for j in x.keys():
+                load[count] = y[j]
+                count += 1
+        return Assgn.__init__(self,load)
+
  #myobject = Assgn({0: ["jA","metres"],1:"d",2:"aa",3:"ff"},None,[False,True,True],"en")
 
 if __name__ == "__main__":
@@ -421,5 +436,7 @@ if __name__ == "__main__":
     data.loadcsv("data.assgnopts.csv")
     data.input() """
     data = Assgn(Ar2Dict(IterAr(5,"peres"),"kilos"))
+    data2 = Assgn(Ar2Dict(IterAr(5,"pomes"),"kilos"))
+    print(data+data2)
     data.input()
     data.save()
