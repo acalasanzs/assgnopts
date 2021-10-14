@@ -201,7 +201,7 @@ class Assgn():
                 mess.Valerr()
             # self.input()
     def input(self):
-        self.name = id(self) if self.name is None else self.name
+        self.name = str(id(self)) if self.name is None else self.name
         # HEADER
         if self.title:
             print(color.t.OKGREEN+"Set of {} questions".format(len(self.array))+color.end)

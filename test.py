@@ -1,6 +1,11 @@
 from assgnopts import *
 import pandas
 
-data = Assgn(range(2),name="olakase")
-data.input()
-print(pandas.read_csv(data.save()))
+diccionari = {
+    0: ("Perse","Kilos"),
+    1: ("Pomes","unitats")
+}
+Les_meves_coses = Assgn(diccionari,conj="com a")
+Les_meves_coses.input()
+Les_meves_coses.dispValues()
+Les_meves_coses.save()
