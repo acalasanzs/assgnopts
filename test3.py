@@ -47,7 +47,8 @@ dispDict(fruits,dictionary)
 dic2 = {}
 for idx,i in enumerate(fruits):
     dic2[i] = (results[idx],"kilos/unit")
-test = np.round(results.reshape(len(fruits),1),3)
-test = pd.DataFrame(dic2,columns=fruits)
-test.to_csv("hello.csv", index=False)
+test = np.round(x.reshape(len(fruits),1),3)
+print(np.multiply(test,np.divide([1],y)))
+test2 = pd.DataFrame(dic2,columns=fruits)
+test2.to_csv("hello.csv", index=False)
 print(pd.read_csv("hello.csv", parse_dates=['Apple']))
