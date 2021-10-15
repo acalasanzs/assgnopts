@@ -48,7 +48,10 @@ dic2 = {}
 for idx,i in enumerate(fruits):
     dic2[i] = (results[idx],"kilos/unit")
 test = np.round(x.reshape(len(fruits),1),3)
-print(np.multiply(test,np.divide([1],y)))
+test3 = np.multiply(test,np.divide([1],y))
 test2 = pd.DataFrame(dic2,columns=fruits)
 test2.to_csv("hello.csv", index=False)
 print(pd.read_csv("hello.csv", parse_dates=['Apple']))
+with open('positive.csv','w') as myfile:
+  wr = csv.writer(myfile) #, quoting=csv.QUOTE_ALL)
+  wr.writerows(test3)
