@@ -18,7 +18,7 @@ fruits = ['Apple']+df['Apple'].tolist()
 
 # Make 2 objects with kilos and units magnitudes
 MyStuff = Assgn(Ar2Dict(fruits,"kilos"),conj="as")
-MySecondStuff = Assgn(Ar2Dict(fruits,"units"),conj="as")
+MySecondStuff = Assgn(Ar2Dict(fruits,"units"),conj="as",rules=[False,False,True])
 
 # Set the two object's values via inputs
 MyStuff.input()

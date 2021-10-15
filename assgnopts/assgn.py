@@ -1,5 +1,5 @@
 """
-Assgnopts Assgn 1.3.7 CSV BUG FIXES
+Assgnopts Assgn 1.3.9 CSV BUG FIXES
 
 Made with love by Albert Calasanz Sallen
 TODO:
