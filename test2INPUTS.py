@@ -40,3 +40,4 @@ print(dictionary)
 
 # Display "fruits: dictionary"
 dispDict(fruits,dictionary)
+print(np.transpose(x,y))

@@ -17,27 +17,33 @@ df = pd.DataFrame(data, columns= ['Apple'])
 fruits = ['Apple']+df['Apple'].tolist()
 
 # Make 2 objects with kilos and units magnitudes
-MyStuff = Assgn(Ar2Dict(fruits,"kilos"),conj="as")
-MySecondStuff = Assgn(Ar2Dict(fruits,"units"),conj="as")
+Kilos = Assgn(Ar2Dict(fruits,"kilos"),conj="as")
+Units = Assgn(Ar2Dict(fruits,"units"),conj="as")
 
 # Set the two object's values (random answers)
-MyStuff.array = [random.choice(list(range(1,1000))) for x in range(len(fruits))]
-MySecondStuff.array = [random.choice(list(range(1,100))) for x in range(len(fruits))]
+Kilos.array = [random.choice(list(range(1,1000))) for x in range(len(fruits))]
+Units.array = [random.choice(list(range(1,100))) for x in range(len(fruits))]
 
 # Display values
-MyStuff.dispValues()
+Kilos.dispValues()
 print("--------------------------------------")
-MySecondStuff.dispValues()
+Units.dispValues()
 
 # Convert to a x,y 2D array
-x = np.array(MyStuff.array)
-y = np.array(MySecondStuff.array)
+x = np.array(Kilos.array)
+y = np.array(Units.array)
 
 # Divide both 1D arrays and truncate It and pass to a dictionary
-dictionary = Ar2Dict2(Ar2List([truncate(i,3) for i in np.divide(x,y)],"kilos/unit"))
+results = np.array([truncate(i,3) for i in np.divide(x,y)])
+dictionary = Ar2Dict2(Ar2List(results,"kilos/unit"))
 
 # Print dictionary
 print(dictionary)
 
 # Display "fruits: dictionary"
 dispDict(fruits,dictionary)
+
+# Combine both 1-dimensional arrays
+""" xy = np.array([x,y])
+test = results.reshape(len(fruits),1)
+print(test) """
