@@ -3,7 +3,7 @@ from assgnopts import *
 import urllib.request
 import pandas as pd
 import numpy as np
-
+from manim import *
 # Import fruits.csv
 urllib.request.urlretrieve(
     'https://raw.githubusercontent.com/knadh/xmlutils.py/master/samples/fruits.csv', 
