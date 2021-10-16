@@ -51,7 +51,15 @@ test = np.round(x.reshape(len(fruits),1),3)
 test3 = np.multiply(test,np.divide([1],y))
 test2 = pd.DataFrame(dic2,columns=fruits)
 test2.to_csv("hello.csv", index=False)
+
+test3 = np.c_[test, test3]
+print(y)
+
+
 print(pd.read_csv("hello.csv", parse_dates=['Apple']))
 with open('positive.csv','w') as myfile:
   wr = csv.writer(myfile) #, quoting=csv.QUOTE_ALL)
+  wr.writerow(np.array([0]+y))
   wr.writerows(test3)
+
+print(pd.read_csv("positive.csv"))
