@@ -28,4 +28,16 @@ model = keras.Sequential([
                 layers.Dense(1, activation='sigmoid')])
 
 model.compile(omptimizer='adam', loss='binary_crossentropy',metrics=['accuracy'])
-history = model.fit(train_batches)
+history = model.fit(train_batches,epochs=10,validation_data=test_batches,validation_steps=20)
+
+history_dict = history.history
+acc = history_dict['accuracy']
+val_acc = history_dict['val_accuracy']
+epochs = range(1,len(acc)+1)
+
+plt.figure(figsize=(12,9))
+plt.plot(epochs,acc, 'bo', label='Training acc')
+plot.plot(epochs,val_acc,'b',label='Validation acc')
+plt.title('Training and validation accuracy')
+plt.xlabel('Epochs')
+plt.xlabel('Epochs')
