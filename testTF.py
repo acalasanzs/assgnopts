@@ -1,43 +1,27 @@
-import io
-import matplotlib.pyplot as plt
+# Importing required libraries
 import tensorflow as tf
 from tensorflow import keras
-from tensorflow.keras import layers
-import tensorflow_datasets as tfds
+from tensorflow.keras.preprocessing.text import Tokenizer
 
-""" eml = layers.Embedding(1000,5)
 
-result = eml(tf.constant([1,2,3]))
+# List of sample sentences that we want to tokenize
+sentences = ['I love my dog',
+             'I love my cat',
+             'you love my dog!',
+             'Do you think my dog is amazing?',
+             ]
 
-print(result.numpy())
-print(result.numpy().shape) """
+# adding a "out of vocabulary" word to the tokenizer
+tokenizer = Tokenizer(num_words = 100,oov_token="<OOV>")
+tokenizer.fit_on_texts(sentences)
+word_index = tokenizer.word_index
+sequences = tokenizer.texts_to_sequences(sentences)
 
-(train_data, test_data), info = tfds.load('imdb_reviews/subwords8k', split=(tfds.Split.TRAIN,tfds.Split.TEST),with_info=True,as_supervised=True)
+test_data = ['i really love my dog',
+             'my dog loves my manatee',
+             ]
 
-encoder = info.features['text'].encoder
-# print(encoder.subwords[:20])
-padded_shapes = ([None], ())
-train_batches = train_data.shuffle(1000).padded_batch(10,padded_shapes=padded_shapes)
+test_seq = tokenizer.texts_to_sequences(test_data)
 
-test_batches = train_data.shuffle(1000).padded_batch(10,padded_shapes=padded_shapes)
-
-embedding_dim = 16
-model = keras.Sequential([
-                layers.Embedding(encoder.vocab_size,embedding_dim),
-                layers.GlobalsAveragePooling1D(),
-                layers.Dense(1, activation='sigmoid')])
-
-model.compile(omptimizer='adam', loss='binary_crossentropy',metrics=['accuracy'])
-history = model.fit(train_batches,epochs=10,validation_data=test_batches,validation_steps=20)
-
-history_dict = history.history
-acc = history_dict['accuracy']
-val_acc = history_dict['val_accuracy']
-epochs = range(1,len(acc)+1)
-
-plt.figure(figsize=(12,9))
-plt.plot(epochs,acc, 'bo', label='Training acc')
-plot.plot(epochs,val_acc,'b',label='Validation acc')
-plt.title('Training and validation accuracy')
-plt.xlabel('Epochs')
-plt.xlabel('Epochs')
+print(word_index)
+print(test_seq)
