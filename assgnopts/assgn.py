@@ -171,6 +171,10 @@ class Assgn():
         if not(load is None) and (rang is None):
             if type(vals) in (tuple,range,list):
                 self.vals = vals
+                if len(self.vals) > 0 and type(self.vals) in (tuple,list):
+                    if type(self.vals[0]) is str:
+                        self.rules = 'str'
+                        self.AllowStr = True
             elif vals is not None:
                 mess.InvalidInput()
         # Comprovar les rules
@@ -443,5 +447,6 @@ class Assgn():
  #myobject = Assgn({0: ["jA","metres"],1:"d",2:"aa",3:"ff"},None,[False,True,True],"en")
 
 if __name__ == "__main__":
-    abc = Assgn(Ar2Dict(["cuants procesos"],"units"),vals=range(1,1001),rules=[False,False,True],ui=False)
-    abc.input()
+    books = [['Génesis', 'Éxodo', 'Levítico', 'Números', 'Deuteronomio', 'Josué', 'Jueces', 'Rut', '1 Samuel', '2 Samuel', '1 Reyes', '2 Reyes', '1 Crónicas', '2 Crónicas', 'Esdras', 'Nehemías', 'Ester', 'Job', 'Salmos', 'Proverbios', 'Eclesiastés', 'El Cantar de los Cantares', 'Isaías', 'Jeremías', 'Lamentaciones', 'Ezequiel', 'Daniel', 'Oseas', 'Joel', 'Amós', 'Abdías', 'Jonás', 'Miqueas', 'Nahúm', 'Habacuc', 'Sofonías', 'Ageo', 'Zacarías', 'Malaquías', 'Mateo', 'Marcos', 'Lucas', 'Juan', 'Hechos', 'Romanos', '1 Corintios', '2 Corintios', 'Gálatas', 'Efesios', 'Filipenses', 'Colosenses', '1 Tesalonicenses', '2 Tesalonicenses', '1 Timoteo', '2 Timoteo', 'Tito', 'Filemón', 'Hebreos', 'Santiago', '1 Pedro', '2 Pedro', '1 Juan', '2 Juan', '3 Juan', 'Judas', 'Apocalipsis'],['Genesis', 'Exodus', 'Leviticus', 'Numbers', 'Deuteronomy', 'Joshua', 'Judges', 'Ruth', '1 Samuel', '2 Samuel', '1 Kings', '2 Kings', '1 Chronicles', '2 Chronicles', 'Ezra', 'Nehemiah', 'Esther', 'Job', 'Psalms', 'Proverbs', 'Ecclesiastes', 'Song of Solomon', 'Isaiah', 'Jeremiah', 'Lamentations', 'Ezekiel', 'Daniel', 'Hosea', 'Joel', 'Amos', 'Obadiah', 'Jonah', 'Micah', 'Nahum', 'Habakkuk', 'Zephaniah', 'Haggai', 'Zechariah', 'Malachi', 'Matthew', 'Mark', 'Luke', 'John', 'Acts', 'Romans', '1 Corinthians', '2 Corinthians', 'Galatians', 'Ephesians', 'Philippians', 'Colossians', '1 Thessalonians', '2 Thessalonians', '1 Timothy', '2 Timothy', 'Titus', 'Philemon', 'Hebrews', 'James', '1 Peter', '2 Peter', '1 John', '2 John', '3 John', 'Jude', 'Revelation'],['Mateu', 'Marc', 'Lluc', 'Joan', 'Fets', 'Romans', '1 Corintis', '2 Corintis', 'Gàlates', 'Efesis', 'Filipencs', 'Colossencs', '1 Tessalonicencs', '2 Tessalonicencs', '1 Timoteu', '2 Timoteu', 'Titus', 'Filemó', 'Hebreus', 'Jaume', '1 Pere', '2 Pere', '1 Joan', '2 Joan', '3 Joan', 'Judes', 'Apocalipsi']]
+    cbook = Assgn(['Book'],vals=books[1])
+    cbook.input()
