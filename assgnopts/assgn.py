@@ -238,7 +238,7 @@ class Assgn():
         for i in self.rang:
             if i < 0:
                 mess.Valerr()
-            def whilefunct(vals):
+            def whilefunct():
                 while True:
                     try:
                         global ans
@@ -270,6 +270,8 @@ class Assgn():
                             try:
                                 if (ans < 0 and not(self.AllowNegative)) or (ans == 0 and not(self.Allow0)) or (ans not in self.vals):
                                     print(mess.err)
+                                else:
+                                    self.array[i] = ans
                             except:
                                 if (ans < 0 and not(self.AllowNegative)) or (ans == 0 and not(self.Allow0)):
                                     print(mess.err)
@@ -293,7 +295,7 @@ class Assgn():
             if self.rules is None:
                 self.ans = -1
                 while True:
-                    whilefunct(self.vals)
+                    whilefunct()
                     if self.vals:
                         if not(self.ans <= 0) and (self.ans in self.vals):
                             break
@@ -306,7 +308,7 @@ class Assgn():
                 if self.AllowStr:
                     self.ans = ""
                     while True:
-                        whilefunct(self.vals)
+                        whilefunct()
                         if self.vals:
                             if len(self.ans)>0 and (self.ans in self.vals):
                                 break
@@ -318,7 +320,7 @@ class Assgn():
                 else:
                     if self.AllowNegative and self.Allow0:
                         while True:
-                            whilefunct(self.vals)
+                            whilefunct()
                             if self.vals:
                                 if not(self.ans <= 0) and (self.ans in self.vals):
                                     break
@@ -329,7 +331,7 @@ class Assgn():
                     elif self.AllowNegative and not(self.Allow0):
                         self.ans = 0
                         while True:
-                            whilefunct(self.vals)
+                            whilefunct()
                             if self.vals:
                                 if not(self.ans == 0) and (self.ans in self.vals):
                                     break
@@ -340,7 +342,7 @@ class Assgn():
                     elif not(self.AllowNegative) and self.Allow0:
                         self.ans = -1
                         while True:
-                            whilefunct(self.vals)
+                            whilefunct()
                             if self.vals:
                                 if not(self.ans < 0) and (self.ans in self.vals):
                                     break
@@ -441,32 +443,5 @@ class Assgn():
  #myobject = Assgn({0: ["jA","metres"],1:"d",2:"aa",3:"ff"},None,[False,True,True],"en")
 
 if __name__ == "__main__":
-    dic = {
-        0: ("Peres","kilos"),
-        1: ("Pomes","unitats")
-    }
-    """ ElMeuObjecte = Assgn(dic)
-    print(ElMeuObjecte) """
-    """ MyObject = Assgn(Ar2Dict(IterAr(1,"Object"),"units"),conj="as",vals=range(1,10))
-    MySecondObject = Assgn(dic)
-    print("________________________________________")
-    MyObject.dispValues()
-    print("____________________")
-    MySecondObject.dispValues() """
-    """ MySecondObject = Assgn(dic)
-    MyThirdObject =  Assgn(Ar2Dict(IterAr(3,"apples"), "units"),conj="as")
-    MyThirdObject.input()
-    print(MyThirdObject.getValues())
-    MyThirdObject.dispValues() """
-    """ data = Assgn(Ar2Dict(IterAr(5,"label"),"ACU(s)"))
-    datafile = data.save()
-    print(pandas.read_csv(datafile,header=0,index_col='DATA'),end="\n\n")
-    data.loadcsv(datafile) """
-    """ data = Assgn(conj="as")
-    data.loadcsv("data.assgnopts.csv")
-    data.input() """
-    data = Assgn(Ar2Dict(IterAr(5,"peres"),"kilos"))
-    data2 = Assgn(Ar2Dict(IterAr(5,"pomes"),"kilos"))
-    print(data+data2)
-    data.input()
-    data.save()
+    abc = Assgn(Ar2Dict(["cuants procesos"],"units"),vals=range(1,1001),rules=[False,False,True],ui=False)
+    abc.input()
